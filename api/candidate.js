@@ -61,7 +61,6 @@ router.get("/acceptedjobs", auth, async function (req, res) {
     populate: { path: "employer_id", populate: "company_id" },
   });
 
-  console.log(jobs.acceptedJob[0].job_id);
   res.render("CanAccpJob.ejs", {
     userData: jobs.acceptedJob,
     name: req.user.name,
