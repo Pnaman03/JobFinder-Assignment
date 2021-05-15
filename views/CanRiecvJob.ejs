@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+        <title>JobFinder</title>
+        <!-- <link rel="stylesheet" href="/stylesheets/office.css"> -->
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+            body{
+                margin: 0;
+                font-size: .9rem;
+                font-weight: 400;
+                line-height: 1.6;
+                color: #212529;
+                text-align: left;
+                background-color: #f5f8fa;
+            }
+
+            .navbar-laravel
+            {
+                box-shadow: 0 2px 4px rgba(0,0,0,.04);
+                background-color: cadetblue;
+            }
+
+            .navbar-brand , .nav-link
+            {
+                font-family: Raleway, sans-serif;
+            }
+
+            .main-container{
+                display: flex;
+                flex-wrap: wrap;
+                overflow-y: scroll;
+                max-height: 90vh;
+            }
+            .main-container > div {
+                margin: 10px 25px;
+                float: right;
+            }
+            
+            .job-card {
+               width: 90%; 
+               margin: 10px auto;
+               border-radius: 20px;
+            }
+            .btn {
+                text-decoration: none;
+                background-color: cadetblue;
+            }
+
+            .sidebar{
+                max-height: 80vh;
+                margin-top: 10px ;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                border-radius: 20px;
+            }
+            .side-item{
+                display: inline-block;
+                margin-left: 10px;
+                padding: 10px 20px;
+                margin-top: 15px;
+                text-decoration: none;
+                color: black;
+                font-size: 18px;
+                border-radius: 20px;
+                background-color: white;
+                border-color: 1px solid cadetblue;
+            }
+
+            a{
+                text-decoration: none;
+                color: black;
+            }
+
+            @media (max-width: 600px) {
+                .card-body {
+                    flex-direction: column;    
+                }
+                
+            }            
+
+        </style>
+    </head>
+    <body>
+       
+
+        <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+            <div class="container">
+            <a class="navbar-brand" href="/"><b style="color: white;">JobFinder</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="dropdown" style="flex-grow: revert;">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user"></i><%= name %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/auth/logout">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        
+        <div class="row">
+            <div class="sidebar col-md-2">
+                <a  class="side-item btn" href="/cand/recievedjobs" style="background-color: cadetblue;"> Recieved Jobs </a></button>
+                <a  class="side-item btn" href="/cand/acceptedjobs"> Accepted Jobs </a>
+                <a  class="side-item btn" href="/cand/rejectedjobs"> Rejected Jobs </a>
+            </div>
+            
+            <div class="main-container col-md-10">
+                <%
+                if(userData.length!=0){
+                var i=1;
+                userData.forEach(function(data){
+                %>
+                    
+                
+                <div class="card job-card " >
+                    <div class="card-body" style="display: flex; justify-content: space-between;">
+                       
+                      <div >
+                        <h5 class="card-title"><%=data.title %></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><%=data.position %></h6>
+                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 2px;">$ <%=data.offer %></h6>
+                      </div>
+                      
+                      <div >
+                        <h6 class="card-title mb-2 text-muted"><%=data.location %></h6>
+                        <p  class="card-text" style="word-wrap: break-word;"> <%=data.description %></p>
+                      </div>
+
+                      <div >
+                        <h6 class="card-subtitle" style=" margin-top: 2px;"><%=data.employer_id.company_id.company_name%></h6><br/><br>
+                        <div style="display: flex; flex-grow: revert;">
+                            <form name="my-form" action="/cand/accept/<%=data._id%>" style="margin-right: 10px;" method="GET" > 
+                                <button class="btn" type="submit"> Accept </button>
+                            </form>
+                            <form name="my-form" action="/cand/reject/<%=data._id%>" method="GET">
+                                <button class="btn" type="submit">  Reject </button>
+                            </form>
+                        </div>
+                     
+                      </div>
+                    </div>
+                  </div>
+                  
+                <%  i++;}) %>
+                <% } else{ %>
+                    <div class="card job-card " >
+                        <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+                           <p> No job Posts !</p>
+                        </div>
+                      </div>
+                <% } %>
+            
+                
+            </div>
+        </div> 
+        </main>
+    </body>
+
+</html>
+

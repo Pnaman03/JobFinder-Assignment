@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+        <title>JobFinder-Home</title>
+        <!-- <link rel="stylesheet" href="/stylesheets/office.css"> -->
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+            body{
+                margin: 0;
+                font-size: .9rem;
+                font-weight: 400;
+                line-height: 1.6;
+                color: #212529;
+                text-align: left;
+                background-color: #f5f8fa;
+            }
+
+            .navbar-laravel
+            {
+                box-shadow: 0 2px 4px rgba(0,0,0,.04);
+                background-color: cadetblue;
+            }
+
+            .navbar-brand , .nav-link, .my-form, .login-form
+            {
+                font-family: Raleway, sans-serif;
+            }
+
+            .my-form
+            {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .my-form .row
+            {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                margin-right: 0;
+            }
+
+            .login-form
+            {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .login-form .row
+            {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .choose-type{
+                display: flex;
+            }
+
+            .choose-type div{
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body  onload="error(`<%= error %>)`)">
+       
+
+        <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+            <div class="container">
+            <a class="navbar-brand" href="/"><b style="color: white;">JobFinder</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow: revert;">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/login"><b style="color: white;">Login</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/register"><b style="color: white;">Register</b></a>
+                    </li>
+                </ul>
+        
+            </div>
+            </div>
+        </nav>
+        
+        <main class="my-form">
+            <div class="cotainer">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div style="float: right;">
+                                    <span >
+                                        Not Registered ? <a href="/auth/register"><span style="font-size: 15px; ">Register</span></a>
+                                    </span>
+                                </div>
+                                Login
+                            </div>
+                            <div class="card-body">
+                                
+                                <div id="employee" style="display: block;" >
+                                    <%
+                                        if(error !== ""){
+                                    %>
+                                    <div style="display: flex; justify-content: center;">
+                                        <p id="error" style="color: red;"><b><%= error %></b></p>
+                                    </div>
+                                    <% } %>
+                                    <form name="my-form" action="/auth/login" method="POST">
+                                        
+                                        <div class="form-group row">
+                                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="email_address" class="form-control" name="email" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Password</label>
+                                            <div class="col-md-6">
+                                                <input type="password" id="confirm_password" class="form-control" name="password" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 offset-md-4" style="display: flex; justify-content: center; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                                            <button type="submit" class="btn btn-primary">
+                                                Login  
+                                            </button>
+                                               
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                </div>
+        
+        </main>
+            
+    <script>
+        function error(s){
+            setInterval(function(){
+                document.getElementById("error").style.display = "none"
+            },5000)
+        }    
+    </script>
+    </body>
+
+</html>

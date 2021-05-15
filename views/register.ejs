@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+        <title>JobFinder-Home</title>
+        <!-- <link rel="stylesheet" href="/stylesheets/office.css"> -->
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+
+            body{
+                margin: 0;
+                font-size: .9rem;
+                font-weight: 400;
+                line-height: 1.6;
+                color: #212529;
+                text-align: left;
+                background-color: #f5f8fa;
+            }
+
+            .navbar-laravel
+            {
+                box-shadow: 0 2px 4px rgba(0,0,0,.04);
+                background-color: cadetblue;
+            }
+
+            .navbar-brand , .nav-link, .my-form, .login-form
+            {
+                font-family: Raleway, sans-serif;
+            }
+
+            .my-form
+            {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .my-form .row
+            {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                margin-right: 0;
+            }
+
+            .login-form
+            {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .login-form .row
+            {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .choose-type{
+                display: flex;
+                width: 50%;
+            }
+
+            .choose-type div{
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body onload="error(`<%= error %>)`)">
+       
+
+        <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+            <div class="container">
+            <a class="navbar-brand" href="/"><b style="color: white;">JobFinder</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow: revert;">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/login"><b style="color: white;">Login</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/register"><b style="color: white;">Register</b></a>
+                    </li>
+                </ul>
+        
+            </div>
+            </div>
+        </nav>
+        
+        <main class="my-form">
+            <div class="cotainer">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div style="float: right;">
+                                    <span >
+                                        Registered ? <a href="/auth/login"><span style="font-size: 15px; ">Login</span></a>
+                                    </span>
+                                </div>
+                                Register
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="choose-type">
+                                    <div  onclick="emphandleclick()" id="emp-btn" style="background-color: #5f9ea0; border-radius:40px;">Employeer</div>
+                                    <div onclick="candhandleclick()" id="can-btn" style="margin-left: 10px; border-radius: 40px;">Candidate</div>
+                                </div>
+                                
+                                <div id="employee" style="display: block;" >
+                                    <%
+                                        if(error !== ""){
+                                    %>
+                                    <div style="display: flex; justify-content: center;">
+                                        <p id="error" style="color: red;"><b><%= error %></b></p>
+                                    </div>
+                                    <% } %>
+                                    <form name="my-form"  action="/auth/register/emp" method="POST">
+                                        
+                                        <div class="form-group row" >
+                                            <label  class="col-md-4 col-form-label text-md-right" ><b style="font-size: 17px;">Employeer Info</b></label>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="full_name" class="form-control" name="full_name" required>
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="email_address" class="form-control" name="email_address" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="phone_number" class="form-control" name="phone_number" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row" >
+                                            <label  class="col-md-4 col-form-label text-md-right" ><b style="font-size: 17px;">Company Info</b></label>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="company_name" class="col-md-4 col-form-label text-md-right">Campany Name</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="company_name" class="form-control" name="company_name" required>
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="company_field" class="col-md-4 col-form-label text-md-right">Field of Work</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="company_field" class="form-control" name="company_field" required>
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="location" class="col-md-4 col-form-label text-md-right"> Location</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="location" class="form-control" name="location" required>
+                                            </div>
+                                        </div>
+                                        <br/>
+
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Password</label>
+                                            <div class="col-md-6">
+                                                <input type="password" id="password" class="form-control" name="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                            <div class="col-md-6">
+                                                <input type="password" id="confirm_password" class="form-control" name="confirm_password" required>
+                                            </div>
+                                        </div>
+        
+                                        <div class="col-md-6 offset-md-4" style="display: flex; justify-content: center; margin-top: 1.5rem;">
+                                            <button type="submit" class="btn btn-primary">
+                                            Register
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="candidate"  style="display: none;">
+                                    <form name="my-form" action="/auth/register/cand" method="POST">
+                                        <div class="form-group row">
+                                            <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="full_name" class="form-control" name="full_name">
+                                            </div>
+                                        </div>
+        
+                                        <div class="form-group row">
+                                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="email_address" class="form-control" name="email_address">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">Phone Number</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="phone_number" class="form-control" name="phone_number">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="location" class="col-md-4 col-form-label text-md-right"> Location</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="location" class="form-control" name="location" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Password</label>
+                                            <div class="col-md-6">
+                                                <input type="password" id="password" class="form-control" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                            <div class="col-md-6">
+                                                <input type="password" id="confirm_password" class="form-control" name="confirm_password">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-10 offset-md-4" style="display: flex; justify-content: center; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                                            <button type="submit" class="btn btn-primary">
+                                                Register  
+                                            </button>  
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                </div>
+        
+        </main>
+            
+    <script>
+        function error(s){
+            
+            setInterval(function(){
+                document.getElementById("error").style.display = "none"
+            },5000)
+        }
+        function emphandleclick(){
+        
+        var emp = document.getElementById("employee")
+        var cand = document.getElementById("candidate")
+   
+        if(emp.style.display === "none" &&  cand.style.display === "block"){
+            emp.style.display = "block"
+            document.getElementById("emp-btn").style.backgroundColor = "#5f9ea0";
+            document.getElementById("can-btn").style.backgroundColor = "white";
+            cand.style.display = "none"
+        }
+        }
+        function candhandleclick(){
+        var emp = document.getElementById("employee")
+        var cand = document.getElementById("candidate")
+
+        if(cand.style.display === "none" &&  emp.style.display === "block"){
+            cand.style.display = "block"
+            document.getElementById("can-btn").style.backgroundColor = "#5f9ea0";
+            document.getElementById("emp-btn").style.backgroundColor = "white";
+            emp.style.display = "none"
+        }
+        }
+    </script>
+    </body>
+
+</html>
