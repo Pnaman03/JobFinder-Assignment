@@ -71,7 +71,7 @@ router.get("/acceptedjobs", auth, async function (req, res) {
 // @access   Private
 router.get("/rejectedjobs", auth, async function (req, res) {
   if (req.user && req.user.type === "Employee") {
-    res.redirect("/login");
+    res.redirect("/auth/logout");
   }
   const jobs = await User.findById(req.user.id, { rejectedJob: 1 }).populate({
     path: "rejectedJob.job_id",

@@ -8,7 +8,7 @@ const Job = require("../models/Job");
 // @access   Private
 router.get("/jobposts", auth, async function (req, res) {
   if (req.user && req.user.type === "Candidate") {
-    res.redirect("/logout");
+    res.redirect("/auth/logout");
   }
 
   const jobs = await Job.find({ employer_id: req.user.id })
