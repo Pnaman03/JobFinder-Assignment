@@ -1,9 +1,9 @@
 # JobFinder-Assignment
 
-Link : https://jobfinder-1.herokuapp.com/
-Credentials : 
-   Employer:   Email: testemp@test.com ,   Password: password
-   Candidate:  Email: test@test.com ,   Password: password 
+Link : https://jobfinder-1.herokuapp.com/ <br/><br/>
+Credentials : <br/>
+- Employer:   Email: testemp@test.com ,   Password: password <br/>  
+- Candidate:  Email: test@test.com ,   Password: password <br/>
            
 About App : 
 1. Used JWT for authentication. 
