@@ -10,7 +10,7 @@ const User = require("../models/User");
 // @access   Private
 router.get("/recievedjobs", auth, async function (req, res) {
   if (req.user && req.user.type === "Employee") {
-    res.redirect("/logout");
+    res.redirect("/auth/logout");
   }
 
   // fetchig all jobs
@@ -54,7 +54,7 @@ router.get("/recievedjobs", auth, async function (req, res) {
 // @access   Private
 router.get("/acceptedjobs", auth, async function (req, res) {
   if (req.user && req.user.type === "Employee") {
-    res.redirect("/login");
+    res.redirect("/auth/logout");
   }
   const jobs = await User.findById(req.user.id, { acceptedJob: 1 }).populate({
     path: "acceptedJob.job_id",
