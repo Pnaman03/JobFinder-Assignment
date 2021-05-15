@@ -33,7 +33,7 @@ app.use("/emp", emp);
 var can = require("./api/candidate");
 app.use("/cand", can);
 
-app.listen(port);
+app.listen(process.env.PORT || port);
 console.log("Listening on port " + port);
 
 module.exports = app;
