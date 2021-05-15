@@ -2,7 +2,8 @@
 
 Link : https://jobfinder-1.herokuapp.com/ <br/><br/>
 Credentials : <br/>
-- Employer:   Email: testemp@test.com ,   Password: password <br/>  
+- Employer1:   Email: testemp@test.com ,   Password: password
+- Employer2:   Email: testemp1@test.com ,   Password: password
 - Candidate:  Email: test@test.com ,   Password: password <br/>
            
 About App : 
